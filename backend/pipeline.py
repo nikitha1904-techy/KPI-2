@@ -1546,8 +1546,19 @@ Return JSON with exactly these keys:
 def llm_gap_recommendations_only(gap_results: Dict[str, Dict[str, Any]], report_best: Dict[str, pd.DataFrame], llm_client: LLMClient) -> Dict[str, Dict[str, Any]]:
     system_prompt = llm_system_prompt("full LLM missing ontology KPI recommendation for report-wise gap analysis")
     for report, data in gap_results.items():
-        existing_kpis = " | ".join(report_best[report]["Report Col Name"].astype(str).map(clean_text).unique()[:40])
-        existing_formulas = " | ".join(report_best[report]["Report Formula"].astype(str).map(clean_text).unique()[:25])
+        # gap_results is keyed by short report scope (for example, EB / Worksite),
+        # while report_best is keyed by visible report label (for example, EB Details / Worksite).
+        # Use the stored label to avoid KeyError during backend execution.
+        source_label = data.get("label", report)
+        best_for_report = report_best.get(source_label)
+        if best_for_report is None:
+            # Defensive fallback for dynamic report labels.
+            best_for_report = report_best.get(report)
+        if best_for_report is None:
+            raise KeyError(f"Could not find best-mapping rows for gap-analysis report '{report}' / '{source_label}'.")
+
+        existing_kpis = " | ".join(best_for_report["Report Col Name"].astype(str).map(clean_text).unique()[:40])
+        existing_formulas = " | ".join(best_for_report["Report Formula"].astype(str).map(clean_text).unique()[:25])
         recs = data["recommendations"].copy()
         for idx, row in recs.iterrows():
             user_prompt = f"""
