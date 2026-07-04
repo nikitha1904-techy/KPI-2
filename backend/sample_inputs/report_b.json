@@ -1,0 +1,2350 @@
+{
+    "schema_version": "7.0-rationalized",
+    "file_name": "LNBAR Worksite A Reserve Details.xlsx",
+    "generated_at": "2026-06-18T10:47:59.767681",
+    "purpose": "This workbook aggregates and summarizes actuarial reserve data for worksite life insurance products. It calculates statutory, tax, and GAAP reserves, as well as face amounts and cash values, by referencing a centralized raw data warehouse.",
+    "process_flow": {
+        "primary_inputs": [
+            "Warehouse Data"
+        ],
+        "intermediate_calculations": [
+            "STAT Reserve",
+            "Tax Reserve",
+            "GAAP Reserve",
+            "Face Amount",
+            "Cash Value",
+            "Count"
+        ],
+        "final_outputs": [
+            "Exhibit 5"
+        ],
+        "vulnerability_rating": "medium"
+    },
+    "workbook_metadata": {
+        "file_name": "LNBAR Worksite A Reserve Details.xlsx",
+        "file_hash_md5": "dadff4f40387250f2357003ec19af8fc",
+        "sheet_count": 3,
+        "sheet_names": [
+            "Summary",
+            "Sheet1",
+            "Warehouse Data"
+        ],
+        "raw_data_sheet_name": "Warehouse Data",
+        "summary_sheet_name": "Summary",
+        "named_ranges": [],
+        "external_links": [],
+        "has_vba_macros": false,
+        "vba_macro_streams": []
+    },
+    "sheets": [
+        {
+            "sheet_name": "Summary",
+            "sheet_type": "summary_report",
+            "sheet_range": "A1:F45",
+            "sheet_metadata": {
+                "row_count": 45,
+                "column_count": 6,
+                "formula_count": 34,
+                "non_empty_cells": 119,
+                "table_count": 7,
+                "pivot_table_count": 0,
+                "print_area": null,
+                "hidden_row_count": 0,
+                "hidden_column_count": 0
+            },
+            "filters": [],
+            "pivot_tables": [],
+            "tables": [
+                {
+                    "table_name": "STAT Reserve",
+                    "table_type": "formula_summary",
+                    "section_title": "STAT Reserve",
+                    "table_range": "A4:F7",
+                    "header_row": 5,
+                    "data_start_row": 6,
+                    "data_end_row": 7,
+                    "total_rows": [],
+                    "check_rows": [],
+                    "row_header_columns": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 6,
+                    "input_cell_count": 0,
+                    "business_purpose": "Calculates the statutory reserve balances by aggregating gross reserves and adjusting for third-party YRT reinsurance.",
+                    "measures": [
+                        "Gross Reserve",
+                        "3rd Party YRT",
+                        "Net Reserve"
+                    ],
+                    "dimensions": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "inter_table_relationships": [
+                        "References 'Warehouse Data' for base calculations and provides input to 'Exhibit 5' for final reporting."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Plan",
+                            "table_name": "STAT Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "LNL 211WULC12"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The specific insurance plan identifier used to filter the warehouse data."
+                        },
+                        {
+                            "column_name": "Product",
+                            "table_name": "STAT Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Ord UL Grp Worksite"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The descriptive name of the insurance product line."
+                        },
+                        {
+                            "column_name": "People Soft Code",
+                            "table_name": "STAT Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "255710"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The internal financial accounting code associated with the product."
+                        },
+                        {
+                            "column_name": "Gross Reserve",
+                            "table_name": "STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS('Warehouse Data'!L:L,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A6)-SUMIFS('Warehouse Data'!M:M,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A6)",
+                            "formula_count": 2,
+                            "formula_pattern": "SUM(Warehouse Data[Statutory Reserves - Total]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]-SUM(Warehouse Data[Statutory Reserves - Rider Subtotal]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                155471471,
+                                155471471
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The total statutory reserve before reinsurance adjustments, derived from warehouse columns L and M.",
+                            "formula_lineage": {
+                                "computation_type": "MULTI_AGG",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Statutory Reserves - Total",
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        },
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Statutory Reserves - Total",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    },
+                                    {
+                                        "column": "Statutory Reserves - Rider Subtotal",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Statutory Reserves - Total",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode",
+                                    "Warehouse Data :: Statutory Reserves - Rider Subtotal"
+                                ],
+                                "fingerprint": "MULTI_AGG|scalar:1|SUM:statutory_reserves_total|WHERE:accounting_date='12_31_2025'&accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        },
+                        {
+                            "column_name": "3rd Party YRT",
+                            "table_name": "STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS('Warehouse Data'!N:N,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A6)+SUMIFS('Warehouse Data'!O:O,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A6)",
+                            "formula_count": 2,
+                            "formula_pattern": "SUM(Warehouse Data[Reinsurance Statutory - Reserve - Total]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]+SUM(Warehouse Data[Recapture Statutory - Reserve - Total]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                77734208,
+                                77734208
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The portion of the reserve ceded to third-party reinsurers via Yearly Renewable Term (YRT) agreements.",
+                            "formula_lineage": {
+                                "computation_type": "MULTI_AGG",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Reinsurance Statutory - Reserve - Total",
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        },
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Reinsurance Statutory - Reserve - Total",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    },
+                                    {
+                                        "column": "Recapture Statutory - Reserve - Total",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Reinsurance Statutory - Reserve - Total",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode",
+                                    "Warehouse Data :: Recapture Statutory - Reserve - Total"
+                                ],
+                                "fingerprint": "MULTI_AGG|scalar:1|SUM:reinsurance_statutory_reserve_total|WHERE:accounting_date='12_31_2025'&accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        },
+                        {
+                            "column_name": "Net Reserve",
+                            "table_name": "STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=-1*SUMIFS('Warehouse Data'!P:P,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A6)",
+                            "formula_count": 1,
+                            "formula_pattern": "-1 * SUM(Warehouse Data[Captive Statutory - Reserve - Total]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                77734901,
+                                77734901
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The final statutory reserve amount after accounting for reinsurance cessions.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": -1,
+                                    "sum_column": "Captive Statutory - Reserve - Total",
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Captive Statutory - Reserve - Total",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Captive Statutory - Reserve - Total",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:-1|SUM:captive_statutory_reserve_total|WHERE:accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "Tax Reserve",
+                    "table_type": "formula_summary",
+                    "section_title": "Tax Reserve",
+                    "table_range": "A9:F12",
+                    "header_row": 10,
+                    "data_start_row": 11,
+                    "data_end_row": 12,
+                    "total_rows": [],
+                    "check_rows": [],
+                    "row_header_columns": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 6,
+                    "input_cell_count": 0,
+                    "business_purpose": "Calculates the tax-basis reserves required for regulatory reporting.",
+                    "measures": [
+                        "Net Reserve"
+                    ],
+                    "dimensions": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "inter_table_relationships": [
+                        "References 'Warehouse Data' specifically for tax-related reserve columns."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Plan",
+                            "table_name": "Tax Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "LNL 211WULC12"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Plan."
+                        },
+                        {
+                            "column_name": "Product",
+                            "table_name": "Tax Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Ord UL Grp Worksite"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Product."
+                        },
+                        {
+                            "column_name": "People Soft Code",
+                            "table_name": "Tax Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "255710"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for People Soft Code."
+                        },
+                        {
+                            "column_name": "Gross Reserve",
+                            "table_name": "Tax Reserve",
+                            "data_type": "string",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Gross Reserve."
+                        },
+                        {
+                            "column_name": "3rd Party YRT",
+                            "table_name": "Tax Reserve",
+                            "data_type": "string",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for 3rd Party YRT."
+                        },
+                        {
+                            "column_name": "Net Reserve",
+                            "table_name": "Tax Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=-1*SUMIFS('Warehouse Data'!Q:Q,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A11)",
+                            "formula_count": 1,
+                            "formula_pattern": "-1 * SUM(Warehouse Data[Captive Tax - Reserve - Total 2018]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                48584137,
+                                48584137
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The net tax reserve calculated by applying a negative multiplier to the warehouse tax reserve data.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": -1,
+                                    "sum_column": "Captive Tax - Reserve - Total 2018",
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Captive Tax - Reserve - Total 2018",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Captive Tax - Reserve - Total 2018",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:-1|SUM:captive_tax_reserve_total_2018|WHERE:accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "GAAP Reserve",
+                    "table_type": "formula_summary",
+                    "section_title": "GAAP Reserve",
+                    "table_range": "A14:F17",
+                    "header_row": 15,
+                    "data_start_row": 16,
+                    "data_end_row": 17,
+                    "total_rows": [],
+                    "check_rows": [],
+                    "row_header_columns": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 6,
+                    "input_cell_count": 0,
+                    "business_purpose": "Summarizes the Generally Accepted Accounting Principles (GAAP) reserve liabilities for the specified products.",
+                    "measures": [
+                        "Gross Reserve",
+                        "3rd Party YRT",
+                        "Net Reserve"
+                    ],
+                    "dimensions": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "inter_table_relationships": [
+                        "Provides net GAAP reserve totals to 'Exhibit 5'."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Plan",
+                            "table_name": "GAAP Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "LNL 211WULC12"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Plan."
+                        },
+                        {
+                            "column_name": "Product",
+                            "table_name": "GAAP Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Ord UL Grp Worksite"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Product."
+                        },
+                        {
+                            "column_name": "People Soft Code",
+                            "table_name": "GAAP Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "255710"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for People Soft Code."
+                        },
+                        {
+                            "column_name": "Gross Reserve",
+                            "table_name": "GAAP Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS('Warehouse Data'!R:R,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A16)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(Warehouse Data[GAAP Reserve - Total]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                193740431
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The total GAAP reserve liability before reinsurance adjustments.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "GAAP Reserve - Total",
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "GAAP Reserve - Total",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: GAAP Reserve - Total",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:gaap_reserve_total|WHERE:accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        },
+                        {
+                            "column_name": "3rd Party YRT",
+                            "table_name": "GAAP Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS('Warehouse Data'!S:S,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A16)+SUMIFS('Warehouse Data'!T:T,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A16)",
+                            "formula_count": 2,
+                            "formula_pattern": "SUM(Warehouse Data[Reinsurance GAAP - Reserve - Total]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]+SUM(Warehouse Data[Recapture GAAP - Reserve - Total]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                77494916
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The GAAP reserve amount ceded to third-party reinsurers.",
+                            "formula_lineage": {
+                                "computation_type": "MULTI_AGG",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Reinsurance GAAP - Reserve - Total",
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        },
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Reinsurance GAAP - Reserve - Total",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    },
+                                    {
+                                        "column": "Recapture GAAP - Reserve - Total",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Reinsurance GAAP - Reserve - Total",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode",
+                                    "Warehouse Data :: Recapture GAAP - Reserve - Total"
+                                ],
+                                "fingerprint": "MULTI_AGG|scalar:1|SUM:reinsurance_gaap_reserve_total|WHERE:accounting_date='12_31_2025'&accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        },
+                        {
+                            "column_name": "Net Reserve",
+                            "table_name": "GAAP Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUM(D16:E16)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(Gross Reserve) + SUM(3rd Party YRT)",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                271235347,
+                                271235347
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUM"
+                            ],
+                            "definition": "The sum of gross reserves and ceded reserves representing the net GAAP liability.",
+                            "formula_lineage": {
+                                "computation_type": "SUM_RANGE",
+                                "computation_params": {},
+                                "lineage_depth": 1,
+                                "direct_inputs": [],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: GAAP Reserve - Total",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Reinsurance GAAP - Reserve - Total",
+                                    "Warehouse Data :: Recapture GAAP - Reserve - Total",
+                                    "Warehouse Data :: Triton Plancode"
+                                ],
+                                "fingerprint": "SUM_RANGE"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "Face Amount",
+                    "table_type": "section_summary",
+                    "section_title": "Face Amount",
+                    "table_range": "A19:F22",
+                    "header_row": 20,
+                    "data_start_row": 21,
+                    "data_end_row": 22,
+                    "total_rows": [],
+                    "check_rows": [],
+                    "row_header_columns": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 6,
+                    "input_cell_count": 0,
+                    "business_purpose": "Summary report showing Gross Face, 3rd Party YRT, Net Face grouped by Plan, Product, People Soft Code.",
+                    "measures": [
+                        "Gross Face",
+                        "3rd Party YRT",
+                        "Net Face"
+                    ],
+                    "dimensions": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "inter_table_relationships": [],
+                    "columns": [
+                        {
+                            "column_name": "Plan",
+                            "table_name": "Face Amount",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "LNL 211WULC12"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Plan."
+                        },
+                        {
+                            "column_name": "Product",
+                            "table_name": "Face Amount",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Ord UL Grp Worksite"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Product."
+                        },
+                        {
+                            "column_name": "People Soft Code",
+                            "table_name": "Face Amount",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "255710"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for People Soft Code."
+                        },
+                        {
+                            "column_name": "Gross Face",
+                            "table_name": "Face Amount",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS('Warehouse Data'!F:F,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A21)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(Warehouse Data[Face Amount - Base]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                383301094,
+                                383301094
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "Aggregated sum of Face Amount - Base, Accounting Date, Triton Plancode from Warehouse Data grouped by Plan, Product, People Soft Code.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Face Amount - Base",
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Face Amount - Base",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Face Amount - Base",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:face_amount_base|WHERE:accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        },
+                        {
+                            "column_name": "3rd Party YRT",
+                            "table_name": "Face Amount",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=-1*SUMIFS('Warehouse Data'!G:G,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A21)",
+                            "formula_count": 1,
+                            "formula_pattern": "-1 * SUM(Warehouse Data[Face Amount - Ceded]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                152927776,
+                                152927776
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "Aggregated sum of Face Amount - Ceded, Accounting Date, Triton Plancode from Warehouse Data grouped by Plan, Product, People Soft Code.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": -1,
+                                    "sum_column": "Face Amount - Ceded",
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Face Amount - Ceded",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Face Amount - Ceded",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:-1|SUM:face_amount_ceded|WHERE:accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        },
+                        {
+                            "column_name": "Net Face",
+                            "table_name": "Face Amount",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=D21+E21",
+                            "formula_count": 1,
+                            "formula_pattern": "Face Amount[Gross Face]+Face Amount[3rd Party YRT]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                536228870,
+                                536228870
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Calculated value based on logic: Face Amount[Gross Face]+Face Amount[3rd Party YRT].",
+                            "formula_lineage": {
+                                "computation_type": "ARITHMETIC",
+                                "computation_params": {
+                                    "inputs": [
+                                        "3rd Party YRT",
+                                        "Gross Face"
+                                    ],
+                                    "expression": "Face Amount[Gross Face]+Face Amount[3rd Party YRT]"
+                                },
+                                "lineage_depth": 2,
+                                "direct_inputs": [
+                                    {
+                                        "column": "3rd Party YRT",
+                                        "table": "Face Amount",
+                                        "is_raw": false,
+                                        "role": "arithmetic_input",
+                                        "nested_lineage": {
+                                            "computation_type": "SUMIFS",
+                                            "computation_params": {
+                                                "agg_function": "SUM",
+                                                "scalar": -1,
+                                                "sum_column": "Face Amount - Ceded",
+                                                "group_by": [
+                                                    "Triton Plancode"
+                                                ],
+                                                "static_filters": [
+                                                    {
+                                                        "column": "Accounting Date",
+                                                        "operator": "=",
+                                                        "value": "'12/31/2025'"
+                                                    }
+                                                ]
+                                            },
+                                            "lineage_depth": 1,
+                                            "direct_inputs": [
+                                                {
+                                                    "column": "Face Amount - Ceded",
+                                                    "table": "Warehouse Data",
+                                                    "is_raw": true,
+                                                    "role": "sum_range"
+                                                },
+                                                {
+                                                    "column": "Accounting Date",
+                                                    "table": "Warehouse Data",
+                                                    "is_raw": true,
+                                                    "role": "static_filter",
+                                                    "filter_value": "'12/31/2025'"
+                                                },
+                                                {
+                                                    "column": "Triton Plancode",
+                                                    "table": "Warehouse Data",
+                                                    "is_raw": true,
+                                                    "role": "group_by_key"
+                                                }
+                                            ],
+                                            "ultimate_raw_sources": [
+                                                "Warehouse Data :: Face Amount - Ceded",
+                                                "Warehouse Data :: Accounting Date",
+                                                "Warehouse Data :: Triton Plancode"
+                                            ],
+                                            "fingerprint": "SUMIFS|scalar:-1|SUM:face_amount_ceded|WHERE:accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                                        }
+                                    },
+                                    {
+                                        "column": "Gross Face",
+                                        "table": "Face Amount",
+                                        "is_raw": false,
+                                        "role": "arithmetic_input",
+                                        "nested_lineage": {
+                                            "computation_type": "SUMIFS",
+                                            "computation_params": {
+                                                "agg_function": "SUM",
+                                                "scalar": 1,
+                                                "sum_column": "Face Amount - Base",
+                                                "group_by": [
+                                                    "Triton Plancode"
+                                                ],
+                                                "static_filters": [
+                                                    {
+                                                        "column": "Accounting Date",
+                                                        "operator": "=",
+                                                        "value": "'12/31/2025'"
+                                                    }
+                                                ]
+                                            },
+                                            "lineage_depth": 1,
+                                            "direct_inputs": [
+                                                {
+                                                    "column": "Face Amount - Base",
+                                                    "table": "Warehouse Data",
+                                                    "is_raw": true,
+                                                    "role": "sum_range"
+                                                },
+                                                {
+                                                    "column": "Accounting Date",
+                                                    "table": "Warehouse Data",
+                                                    "is_raw": true,
+                                                    "role": "static_filter",
+                                                    "filter_value": "'12/31/2025'"
+                                                },
+                                                {
+                                                    "column": "Triton Plancode",
+                                                    "table": "Warehouse Data",
+                                                    "is_raw": true,
+                                                    "role": "group_by_key"
+                                                }
+                                            ],
+                                            "ultimate_raw_sources": [
+                                                "Warehouse Data :: Face Amount - Base",
+                                                "Warehouse Data :: Accounting Date",
+                                                "Warehouse Data :: Triton Plancode"
+                                            ],
+                                            "fingerprint": "SUMIFS|scalar:1|SUM:face_amount_base|WHERE:accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                                        }
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Face Amount - Ceded",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode",
+                                    "Warehouse Data :: Face Amount - Base"
+                                ],
+                                "fingerprint": "ARITHMETIC|USES:warehouse_data_::_accounting_date,warehouse_data_::_face_amount_base,warehouse_data_::_face_amount_ceded,warehouse_data_::_triton_plancode"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "Cash Value",
+                    "table_type": "section_summary",
+                    "section_title": "Cash Value",
+                    "table_range": "A24:D27",
+                    "header_row": 25,
+                    "data_start_row": 26,
+                    "data_end_row": 27,
+                    "total_rows": [],
+                    "check_rows": [],
+                    "row_header_columns": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 4,
+                    "input_cell_count": 0,
+                    "business_purpose": "Summary report showing Cash Value grouped by Plan, Product, People Soft Code.",
+                    "measures": [
+                        "Cash Value"
+                    ],
+                    "dimensions": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "inter_table_relationships": [],
+                    "columns": [
+                        {
+                            "column_name": "Plan",
+                            "table_name": "Cash Value",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "LNL 211WULC12"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Plan."
+                        },
+                        {
+                            "column_name": "Product",
+                            "table_name": "Cash Value",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Ord UL Grp Worksite"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Product."
+                        },
+                        {
+                            "column_name": "People Soft Code",
+                            "table_name": "Cash Value",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "255710"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for People Soft Code."
+                        },
+                        {
+                            "column_name": "Cash Value",
+                            "table_name": "Cash Value",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS('Warehouse Data'!H:H,'Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A26)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(Warehouse Data[Cash Value - General Account]) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                116469605,
+                                116469605
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "Aggregated sum of Accounting Date, Cash Value - General Account, Triton Plancode from Warehouse Data grouped by Plan, Product, People Soft Code.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Cash Value - General Account",
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Cash Value - General Account",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Cash Value - General Account",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:cash_value_general_account|WHERE:accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "Count",
+                    "table_type": "section_summary",
+                    "section_title": "Count",
+                    "table_range": "A29:D32",
+                    "header_row": 30,
+                    "data_start_row": 31,
+                    "data_end_row": 32,
+                    "total_rows": [],
+                    "check_rows": [],
+                    "row_header_columns": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 4,
+                    "input_cell_count": 0,
+                    "business_purpose": "Summary report showing Count grouped by Plan, Product, People Soft Code.",
+                    "measures": [
+                        "Count"
+                    ],
+                    "dimensions": [
+                        "Plan",
+                        "Product",
+                        "People Soft Code"
+                    ],
+                    "inter_table_relationships": [],
+                    "columns": [
+                        {
+                            "column_name": "Plan",
+                            "table_name": "Count",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "LNL 211WULC12"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Plan."
+                        },
+                        {
+                            "column_name": "Product",
+                            "table_name": "Count",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Ord UL Grp Worksite"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Product."
+                        },
+                        {
+                            "column_name": "People Soft Code",
+                            "table_name": "Count",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "255710"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for People Soft Code."
+                        },
+                        {
+                            "column_name": "Count",
+                            "table_name": "Count",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=COUNTIFS('Warehouse Data'!$C:$C,Summary!$A$2,'Warehouse Data'!$B:$B,Summary!$A31)",
+                            "formula_count": 1,
+                            "formula_pattern": "COUNT(Warehouse Data) WHERE [Accounting Date = '12/31/2025'] GROUP BY [Triton Plancode]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                1400,
+                                1400
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "COUNTIFS"
+                            ],
+                            "definition": "Aggregated count of records from Warehouse Data matching row criteria.",
+                            "formula_lineage": {
+                                "computation_type": "COUNTIFS",
+                                "computation_params": {
+                                    "group_by": [
+                                        "Triton Plancode"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "Accounting Date",
+                                            "operator": "=",
+                                            "value": "'12/31/2025'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Accounting Date",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'12/31/2025'"
+                                    },
+                                    {
+                                        "column": "Triton Plancode",
+                                        "table": "Warehouse Data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Triton Plancode"
+                                ],
+                                "fingerprint": "COUNTIFS|WHERE:accounting_date='12_31_2025'|GROUP_BY:triton_plancode"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "Exhibit 5",
+                    "table_type": "section_summary",
+                    "section_title": "Exhibit 5",
+                    "table_range": "A35:D45",
+                    "header_row": 37,
+                    "data_start_row": 38,
+                    "data_end_row": 44,
+                    "total_rows": [
+                        45
+                    ],
+                    "check_rows": [],
+                    "row_header_columns": [
+                        "Section Desc",
+                        "Section"
+                    ],
+                    "column_header_rows": [
+                        36
+                    ],
+                    "row_count": 7,
+                    "column_count": 4,
+                    "input_cell_count": 4,
+                    "business_purpose": "The final reporting table that breaks down net reserves by section (e.g., Base, ADB) for statutory and GAAP purposes.",
+                    "measures": [
+                        "STAT Reserve Net Reserve",
+                        "GAAP Reserve Net Reserve"
+                    ],
+                    "dimensions": [
+                        "Section Desc",
+                        "Section"
+                    ],
+                    "inter_table_relationships": [
+                        "Consolidates net reserve values from the 'STAT Reserve' and 'GAAP Reserve' tables."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Section Desc",
+                            "table_name": "Exhibit 5",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Base ",
+                                "ADB",
+                                "Active - Disabled (WP)"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Section Desc."
+                        },
+                        {
+                            "column_name": "Section",
+                            "table_name": "Exhibit 5",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "A",
+                                "D",
+                                "E"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Section."
+                        },
+                        {
+                            "column_name": "STAT Reserve Net Reserve",
+                            "table_name": "Exhibit 5",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=F7-SUM(C39:C44)",
+                            "formula_count": 1,
+                            "formula_pattern": "STAT Reserve[Net Reserve]-SUM(STAT Reserve Net Reserve)",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                29153582,
+                                9716271,
+                                5829459
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUM"
+                            ],
+                            "definition": "The net statutory reserve allocated to specific policy sections.",
+                            "formula_lineage": {
+                                "computation_type": "SUM_RANGE",
+                                "computation_params": {},
+                                "lineage_depth": 1,
+                                "direct_inputs": [],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Net Reserve",
+                                    "Warehouse Data :: Statutory - Reserve - ADB"
+                                ],
+                                "fingerprint": "SUM_RANGE"
+                            }
+                        },
+                        {
+                            "column_name": "GAAP Reserve Net Reserve",
+                            "table_name": "Exhibit 5",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=F17-SUM(D39:D44)",
+                            "formula_count": 1,
+                            "formula_pattern": "GAAP Reserve[Net Reserve]-SUM(GAAP Reserve Net Reserve)",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                251863331,
+                                9686375,
+                                5811517
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUM"
+                            ],
+                            "definition": "The net GAAP reserve allocated to specific policy sections.",
+                            "formula_lineage": {
+                                "computation_type": "SUM_RANGE",
+                                "computation_params": {},
+                                "lineage_depth": 1,
+                                "direct_inputs": [],
+                                "ultimate_raw_sources": [
+                                    "Warehouse Data :: GAAP - Reserve - ADB",
+                                    "Warehouse Data :: Accounting Date",
+                                    "Warehouse Data :: Net Reserve"
+                                ],
+                                "fingerprint": "SUM_RANGE"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "sheet_name": "Sheet1",
+            "sheet_type": "helper",
+            "sheet_range": "A1:E6",
+            "sheet_metadata": {
+                "row_count": 6,
+                "column_count": 5,
+                "formula_count": 0,
+                "non_empty_cells": 15,
+                "table_count": 1,
+                "pivot_table_count": 0,
+                "print_area": null,
+                "hidden_row_count": 0,
+                "hidden_column_count": 0,
+                "columns": []
+            },
+            "filters": [],
+            "pivot_tables": [],
+            "tables": [
+                {
+                    "table_name": "Table_A_3",
+                    "table_type": "section_summary",
+                    "section_title": "",
+                    "table_range": "A3:E6",
+                    "header_row": 3,
+                    "data_start_row": 4,
+                    "data_end_row": 6,
+                    "total_rows": [],
+                    "check_rows": [],
+                    "row_header_columns": [],
+                    "column_header_rows": [],
+                    "row_count": 3,
+                    "column_count": 5,
+                    "input_cell_count": 3,
+                    "business_purpose": "Data table.",
+                    "measures": [],
+                    "dimensions": [],
+                    "inter_table_relationships": [],
+                    "columns": [
+                        {
+                            "column_name": "",
+                            "table_name": "Table_A_3",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for ."
+                        },
+                        {
+                            "column_name": "Logical step",
+                            "table_name": "Table_A_3",
+                            "data_type": "string",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "detect all data tabs",
+                                "loop across data tabs - and find any derived columns",
+                                "loop across derived column and create those columns"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Logical step."
+                        },
+                        {
+                            "column_name": "AI/Non-AI",
+                            "table_name": "Table_A_3",
+                            "data_type": "string",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "??",
+                                "Non-AI",
+                                "Non-ai"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for AI/Non-AI."
+                        },
+                        {
+                            "column_name": "Non-AP Approach",
+                            "table_name": "Table_A_3",
+                            "data_type": "string",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Python library name - it will extract this info from VBA",
+                                "Python libraries"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Non-AP Approach."
+                        },
+                        {
+                            "column_name": "AI Approach",
+                            "table_name": "Table_A_3",
+                            "data_type": "string",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for AI Approach."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "sheet_name": "Warehouse Data",
+            "sheet_type": "raw_data",
+            "sheet_range": "A1:AB1401",
+            "sheet_metadata": {
+                "row_count": 1401,
+                "column_count": 28,
+                "formula_count": 0,
+                "non_empty_cells": 560,
+                "table_count": 1,
+                "pivot_table_count": 0,
+                "print_area": null,
+                "hidden_row_count": 0,
+                "hidden_column_count": 0,
+                "columns": [
+                    "Policy Number",
+                    "Triton Plancode",
+                    "Accounting Date",
+                    "Plancode Description",
+                    "Ledger Product",
+                    "Face Amount - Base",
+                    "Face Amount - Ceded",
+                    "Cash Value - General Account",
+                    "Current Death Benefit - Base",
+                    "Death Benefit - Riders",
+                    "Captive Death Benefit",
+                    "Statutory Reserves - Total",
+                    "Statutory Reserves - Rider Subtotal",
+                    "Reinsurance Statutory - Reserve - Total",
+                    "Recapture Statutory - Reserve - Total",
+                    "Captive Statutory - Reserve - Total",
+                    "Captive Tax - Reserve - Total 2018",
+                    "GAAP Reserve - Total",
+                    "Reinsurance GAAP - Reserve - Total",
+                    "Recapture GAAP - Reserve - Total",
+                    "Statutory - Reserve - ADB",
+                    "Statutory - Reserve - WPA",
+                    "Statutory - Reserve - WPD",
+                    "Statutory Reserves - Excess Cash Value",
+                    "Statutory Reserves \u2013 Total Deficiency",
+                    "GAAP - Reserve - ADB",
+                    "GAAP - Reserve - WPA",
+                    "GAAP - Reserve - WPD"
+                ]
+            },
+            "filters": [],
+            "pivot_tables": [],
+            "tables": [
+                {
+                    "table_name": "Table_A_1",
+                    "table_type": "section_summary",
+                    "section_title": "",
+                    "table_range": "A1:AB20",
+                    "header_row": 1,
+                    "data_start_row": 2,
+                    "data_end_row": 20,
+                    "total_rows": [],
+                    "check_rows": [],
+                    "row_header_columns": [
+                        "Policy Number",
+                        "Triton Plancode",
+                        "Plancode Description",
+                        "Ledger Product"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 19,
+                    "column_count": 28,
+                    "input_cell_count": 437,
+                    "business_purpose": "Data table grouped by Policy Number, Triton Plancode, Plancode Description, Ledger Product.",
+                    "measures": [],
+                    "dimensions": [
+                        "Policy Number",
+                        "Triton Plancode",
+                        "Plancode Description",
+                        "Ledger Product"
+                    ],
+                    "inter_table_relationships": [],
+                    "columns": [
+                        {
+                            "column_name": "Policy Number",
+                            "table_name": "Table_A_1",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "P100000",
+                                "P100001",
+                                "P100002"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Policy Number."
+                        },
+                        {
+                            "column_name": "Triton Plancode",
+                            "table_name": "Table_A_1",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "LNL 211WULC12",
+                                "LNL 211WULC12",
+                                "LNL 211WULC12"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Triton Plancode."
+                        },
+                        {
+                            "column_name": "Accounting Date",
+                            "table_name": "Table_A_1",
+                            "data_type": "string",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "12/31/2025",
+                                "12/31/2025",
+                                "12/31/2025"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Accounting Date."
+                        },
+                        {
+                            "column_name": "Plancode Description",
+                            "table_name": "Table_A_1",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Ord UL Grp Worksite",
+                                "Ord UL Grp Worksite",
+                                "Ord UL Grp Worksite"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Plancode Description."
+                        },
+                        {
+                            "column_name": "Ledger Product",
+                            "table_name": "Table_A_1",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "255710",
+                                "255710",
+                                "255710"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Ledger Product."
+                        },
+                        {
+                            "column_name": "Face Amount - Base",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                393447,
+                                496881,
+                                147596
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Face Amount - Base."
+                        },
+                        {
+                            "column_name": "Face Amount - Ceded",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                -193747,
+                                -137992,
+                                -39531
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Face Amount - Ceded."
+                        },
+                        {
+                            "column_name": "Cash Value - General Account",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                112811,
+                                242311,
+                                34052
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Cash Value - General Account."
+                        },
+                        {
+                            "column_name": "Current Death Benefit - Base",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                393447,
+                                496881,
+                                147596
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Current Death Benefit - Base."
+                        },
+                        {
+                            "column_name": "Death Benefit - Riders",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                39344,
+                                49688,
+                                14759
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Death Benefit - Riders."
+                        },
+                        {
+                            "column_name": "Captive Death Benefit",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                19672,
+                                24844,
+                                7379
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Captive Death Benefit."
+                        },
+                        {
+                            "column_name": "Statutory Reserves - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                310943,
+                                293697,
+                                41098
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Statutory Reserves - Total."
+                        },
+                        {
+                            "column_name": "Statutory Reserves - Rider Subtotal",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                62188,
+                                58739,
+                                8219
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Statutory Reserves - Rider Subtotal."
+                        },
+                        {
+                            "column_name": "Reinsurance Statutory - Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                93282,
+                                88109,
+                                12329
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Reinsurance Statutory - Reserve - Total."
+                        },
+                        {
+                            "column_name": "Recapture Statutory - Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                31094,
+                                29369,
+                                4109
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Recapture Statutory - Reserve - Total."
+                        },
+                        {
+                            "column_name": "Captive Statutory - Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                -124377,
+                                -117478,
+                                -16439
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Captive Statutory - Reserve - Total."
+                        },
+                        {
+                            "column_name": "Captive Tax - Reserve - Total 2018",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                -77735,
+                                -73424,
+                                -10274
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Captive Tax - Reserve - Total 2018."
+                        },
+                        {
+                            "column_name": "GAAP Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                352430,
+                                340255,
+                                35545
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for GAAP Reserve - Total."
+                        },
+                        {
+                            "column_name": "Reinsurance GAAP - Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                105729,
+                                102076,
+                                10663
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Reinsurance GAAP - Reserve - Total."
+                        },
+                        {
+                            "column_name": "Recapture GAAP - Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                35243,
+                                34025,
+                                3554
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Recapture GAAP - Reserve - Total."
+                        },
+                        {
+                            "column_name": "Statutory - Reserve - ADB",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                15547,
+                                14684,
+                                2054
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Statutory - Reserve - ADB."
+                        },
+                        {
+                            "column_name": "Statutory - Reserve - WPA",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                9328,
+                                8810,
+                                1232
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Statutory - Reserve - WPA."
+                        },
+                        {
+                            "column_name": "Statutory - Reserve - WPD",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                6218,
+                                5873,
+                                821
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Statutory - Reserve - WPD."
+                        },
+                        {
+                            "column_name": "Statutory Reserves - Excess Cash Value",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                31094,
+                                29369,
+                                4109
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Statutory Reserves - Excess Cash Value."
+                        },
+                        {
+                            "column_name": "Statutory Reserves \u2013 Total Deficiency",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                15547,
+                                14684,
+                                2054
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Statutory Reserves \u2013 Total Deficiency."
+                        },
+                        {
+                            "column_name": "GAAP - Reserve - ADB",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                17621,
+                                17012,
+                                1777
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for GAAP - Reserve - ADB."
+                        },
+                        {
+                            "column_name": "GAAP - Reserve - WPA",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                10572,
+                                10207,
+                                1066
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for GAAP - Reserve - WPA."
+                        },
+                        {
+                            "column_name": "GAAP - Reserve - WPD",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                7048,
+                                6805,
+                                710
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for GAAP - Reserve - WPD."
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "extraction_warnings": []
+}

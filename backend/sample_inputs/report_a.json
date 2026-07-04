@@ -1,0 +1,2338 @@
+{
+    "schema_version": "7.0-rationalized",
+    "file_name": "LNBAR 2024 EB Reserve Deatils.xlsx",
+    "generated_at": "2026-06-18T10:47:48.424002",
+    "purpose": "This workbook serves as a centralized reporting tool to aggregate and summarize statutory, tax, and GAAP reserves for LNBAR 2024 Employee Benefits (EB) products. It processes raw policy-level data to provide management with key financial metrics including face amounts, cash values, and policy counts by product subtype.",
+    "process_flow": {
+        "primary_inputs": [
+            "SQL_data"
+        ],
+        "intermediate_calculations": [
+            "STAT Reserve",
+            "LNBAR 2024 EB Total STAT Reserve",
+            "Tax Reserves",
+            "GAAP Ben Reserves",
+            "Face Amount",
+            "Cash Value",
+            "Count"
+        ],
+        "final_outputs": [
+            "Summary"
+        ],
+        "vulnerability_rating": "low"
+    },
+    "workbook_metadata": {
+        "file_name": "LNBAR 2024 EB Reserve Deatils.xlsx",
+        "file_hash_md5": "123e2b5b42733b1b864d65b9ec18380a",
+        "sheet_count": 2,
+        "sheet_names": [
+            "SQL_data",
+            "Summary"
+        ],
+        "raw_data_sheet_name": "SQL_data",
+        "summary_sheet_name": "Summary",
+        "named_ranges": [],
+        "external_links": [],
+        "has_vba_macros": false,
+        "vba_macro_streams": []
+    },
+    "sheets": [
+        {
+            "sheet_name": "SQL_data",
+            "sheet_type": "raw_data",
+            "sheet_range": "A1:U6001",
+            "sheet_metadata": {
+                "row_count": 6001,
+                "column_count": 21,
+                "formula_count": 0,
+                "non_empty_cells": 420,
+                "table_count": 1,
+                "pivot_table_count": 0,
+                "print_area": null,
+                "hidden_row_count": 0,
+                "hidden_column_count": 0,
+                "columns": [
+                    "Accounting Date",
+                    "Product Subtype",
+                    "RBC C2 Product Category",
+                    "Statutory Reserves - Total - General Account",
+                    "Statutory Reserves - Total - Separate Account",
+                    "Reinsurance Statutory Reserve - Total",
+                    "Captive Statutory Reserve - Total",
+                    "Net Statutory Reserves - Total",
+                    "GAAP Reserve - Total",
+                    "Non-TAI Reinsurance GAAP Reserve - Total",
+                    "Face Amount - Base",
+                    "Face Amount - Addl Term Rider",
+                    "Face Amount - Ceded",
+                    "Cash Value - General Account",
+                    "Policy Number",
+                    "Net Tax Reserves - Total 2018 - General Account",
+                    "Net Tax Reserves - Total 2018 - Separate Account",
+                    "Net Tax Reserves - Total 2018",
+                    "Captive Tax - Reserve - Total 2018",
+                    "GAAP Reserve - Total",
+                    "Non-TAI Reinsurance GAAP - Reserve - Total"
+                ]
+            },
+            "filters": [],
+            "pivot_tables": [],
+            "tables": [
+                {
+                    "table_name": "Table_A_1",
+                    "table_type": "section_summary",
+                    "section_title": "",
+                    "table_range": "A1:U20",
+                    "header_row": 1,
+                    "data_start_row": 2,
+                    "data_end_row": 20,
+                    "total_rows": [],
+                    "check_rows": [],
+                    "row_header_columns": [
+                        "Product Subtype",
+                        "RBC C2 Product Category"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 19,
+                    "column_count": 21,
+                    "input_cell_count": 323,
+                    "business_purpose": "Data table grouped by Product Subtype, RBC C2 Product Category.",
+                    "measures": [],
+                    "dimensions": [
+                        "Product Subtype",
+                        "RBC C2 Product Category"
+                    ],
+                    "inter_table_relationships": [],
+                    "columns": [
+                        {
+                            "column_name": "Accounting Date",
+                            "table_name": "Table_A_1",
+                            "data_type": "string",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "2025-12-31",
+                                "2025-12-31",
+                                "2025-12-31"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Accounting Date."
+                        },
+                        {
+                            "column_name": "Product Subtype",
+                            "table_name": "Table_A_1",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "BOLI UL",
+                                "BOLI UL",
+                                "COLI VUL"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for Product Subtype."
+                        },
+                        {
+                            "column_name": "RBC C2 Product Category",
+                            "table_name": "Table_A_1",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "Non-Flexible",
+                                "Non-Flexible",
+                                "Flexible"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Dimension label identifying the row taxonomy for RBC C2 Product Category."
+                        },
+                        {
+                            "column_name": "Statutory Reserves - Total - General Account",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                235948,
+                                255694,
+                                228887
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Statutory Reserves - Total - General Account."
+                        },
+                        {
+                            "column_name": "Statutory Reserves - Total - Separate Account",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                45172,
+                                21829,
+                                43114
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Statutory Reserves - Total - Separate Account."
+                        },
+                        {
+                            "column_name": "Reinsurance Statutory Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                28617,
+                                27223,
+                                29690
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Reinsurance Statutory Reserve - Total."
+                        },
+                        {
+                            "column_name": "Captive Statutory Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                -227376,
+                                -220537,
+                                -183280
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Captive Statutory Reserve - Total."
+                        },
+                        {
+                            "column_name": "Net Statutory Reserves - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                82361,
+                                84209,
+                                118411
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Net Statutory Reserves - Total."
+                        },
+                        {
+                            "column_name": "GAAP Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                85292,
+                                78515,
+                                123373
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for GAAP Reserve - Total."
+                        },
+                        {
+                            "column_name": "Non-TAI Reinsurance GAAP Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                2065,
+                                1143,
+                                1789
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Non-TAI Reinsurance GAAP Reserve - Total."
+                        },
+                        {
+                            "column_name": "Face Amount - Base",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                487736,
+                                809746,
+                                597952
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Face Amount - Base."
+                        },
+                        {
+                            "column_name": "Face Amount - Addl Term Rider",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                118906,
+                                234105,
+                                200665
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Face Amount - Addl Term Rider."
+                        },
+                        {
+                            "column_name": "Face Amount - Ceded",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                -176147,
+                                -258385,
+                                -114629
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Face Amount - Ceded."
+                        },
+                        {
+                            "column_name": "Cash Value - General Account",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                109484,
+                                105097,
+                                133266
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Cash Value - General Account."
+                        },
+                        {
+                            "column_name": "Policy Number",
+                            "table_name": "Table_A_1",
+                            "data_type": "string",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "P0",
+                                "P1",
+                                "P2"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Policy Number."
+                        },
+                        {
+                            "column_name": "Net Tax Reserves - Total 2018 - General Account",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                206560,
+                                195287,
+                                233744
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Net Tax Reserves - Total 2018 - General Account."
+                        },
+                        {
+                            "column_name": "Net Tax Reserves - Total 2018 - Separate Account",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                21084,
+                                23538,
+                                13743
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Net Tax Reserves - Total 2018 - Separate Account."
+                        },
+                        {
+                            "column_name": "Net Tax Reserves - Total 2018",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                227644,
+                                218825,
+                                247487
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Net Tax Reserves - Total 2018."
+                        },
+                        {
+                            "column_name": "Captive Tax - Reserve - Total 2018",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                -130836,
+                                -122413,
+                                -144008
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Captive Tax - Reserve - Total 2018."
+                        },
+                        {
+                            "column_name": "GAAP Reserve - Total_1",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                84986,
+                                76447,
+                                92982
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for GAAP Reserve - Total_1."
+                        },
+                        {
+                            "column_name": "Non-TAI Reinsurance GAAP - Reserve - Total",
+                            "table_name": "Table_A_1",
+                            "data_type": "integer",
+                            "type": "raw",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                1844,
+                                1485,
+                                1341
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "Raw source value or input column for Non-TAI Reinsurance GAAP - Reserve - Total."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "sheet_name": "Summary",
+            "sheet_type": "summary_report",
+            "sheet_range": "A1:K45",
+            "sheet_metadata": {
+                "row_count": 45,
+                "column_count": 11,
+                "formula_count": 92,
+                "non_empty_cells": 159,
+                "table_count": 7,
+                "pivot_table_count": 0,
+                "print_area": null,
+                "hidden_row_count": 0,
+                "hidden_column_count": 0
+            },
+            "filters": [],
+            "pivot_tables": [],
+            "tables": [
+                {
+                    "table_name": "STAT Reserve",
+                    "table_type": "formula_summary",
+                    "section_title": "STAT Reserve",
+                    "table_range": "A4:G9",
+                    "header_row": 5,
+                    "data_start_row": 6,
+                    "data_end_row": 7,
+                    "total_rows": [
+                        8
+                    ],
+                    "check_rows": [
+                        9
+                    ],
+                    "row_header_columns": [
+                        "Product Subtype"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 7,
+                    "input_cell_count": 0,
+                    "business_purpose": "Summarizes statutory reserve components including General Account, Separate Account, and 3rd party adjustments for specific product subtypes.",
+                    "measures": [
+                        "LFG Gross GA STAT Reserve",
+                        "LFG Gross SA STAT Reserve",
+                        "3rd Party STAT Component",
+                        "LFG Net 3rd Party Total STAT Reserve",
+                        "LNBAR 2024 EB Total STAT Reserve",
+                        "LFG Net Total STAT Reserve"
+                    ],
+                    "dimensions": [
+                        "Product Subtype"
+                    ],
+                    "inter_table_relationships": [
+                        "Uses row 9 as a check row to ensure data integrity against total calculations."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Product Subtype",
+                            "table_name": "STAT Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "BOLI UL",
+                                "COLI VUL"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The specific category of the insurance product being analyzed."
+                        },
+                        {
+                            "column_name": "LFG Gross GA STAT Reserve",
+                            "table_name": "STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!D:D,SQL_data!$B:$B,Summary!$A6)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Statutory Reserves - Total - General Account]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                812731465,
+                                539331006
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The total statutory reserve held in the General Account for the specified product subtype.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Statutory Reserves - Total - General Account",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Statutory Reserves - Total - General Account",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Statutory Reserves - Total - General Account"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:statutory_reserves_total_general_account|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LFG Gross SA STAT Reserve",
+                            "table_name": "STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!E:E,SQL_data!$B:$B,Summary!$A6)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Statutory Reserves - Total - Separate Account]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                100915897,
+                                67764464
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The total statutory reserve held in the Separate Account for the specified product subtype.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Statutory Reserves - Total - Separate Account",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Statutory Reserves - Total - Separate Account",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Statutory Reserves - Total - Separate Account"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:statutory_reserves_total_separate_account|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "3rd Party STAT Component",
+                            "table_name": "STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!F:F,SQL_data!$B:$B,Summary!$A6)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Reinsurance Statutory Reserve - Total]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                142196313,
+                                94006311
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The portion of the statutory reserve attributable to third-party reinsurance arrangements.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Reinsurance Statutory Reserve - Total",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Reinsurance Statutory Reserve - Total",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Reinsurance Statutory Reserve - Total"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:reinsurance_statutory_reserve_total|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LFG Net 3rd Party Total STAT Reserve",
+                            "table_name": "STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=B6+C6-D6",
+                            "formula_count": 1,
+                            "formula_pattern": "STAT Reserve[LFG Gross GA STAT Reserve]+STAT Reserve[LFG Gross SA STAT Reserve]-STAT Reserve[3rd Party STAT Component]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                771451049,
+                                513089159
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The net statutory reserve position calculated by adjusting gross reserves for third-party components.",
+                            "formula_lineage": {
+                                "computation_type": "ARITHMETIC",
+                                "computation_params": {
+                                    "inputs": [
+                                        "LFG Gross SA STAT Reserve",
+                                        "3rd Party STAT Component",
+                                        "LFG Gross GA STAT Reserve"
+                                    ],
+                                    "expression": "STAT Reserve[LFG Gross GA STAT Reserve]+STAT Reserve[LFG Gross SA STAT Reserve]-STAT Reserve[3rd Party STAT Component]"
+                                },
+                                "lineage_depth": 2,
+                                "direct_inputs": [
+                                    {
+                                        "column": "LFG Gross SA STAT Reserve",
+                                        "table": "STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "arithmetic_input",
+                                        "nested_lineage": {
+                                            "computation_type": "SUMIFS",
+                                            "computation_params": {
+                                                "agg_function": "SUM",
+                                                "scalar": 1,
+                                                "sum_column": "Statutory Reserves - Total - Separate Account",
+                                                "group_by": [
+                                                    "Product Subtype"
+                                                ],
+                                                "static_filters": []
+                                            },
+                                            "lineage_depth": 1,
+                                            "direct_inputs": [
+                                                {
+                                                    "column": "Statutory Reserves - Total - Separate Account",
+                                                    "table": "SQL_data",
+                                                    "is_raw": true,
+                                                    "role": "sum_range"
+                                                },
+                                                {
+                                                    "column": "Product Subtype",
+                                                    "table": "STAT Reserve",
+                                                    "is_raw": false,
+                                                    "role": "group_by_key"
+                                                }
+                                            ],
+                                            "ultimate_raw_sources": [
+                                                "SQL_data :: Statutory Reserves - Total - Separate Account"
+                                            ],
+                                            "fingerprint": "SUMIFS|scalar:1|SUM:statutory_reserves_total_separate_account|GROUP_BY:product_subtype"
+                                        }
+                                    },
+                                    {
+                                        "column": "3rd Party STAT Component",
+                                        "table": "STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "arithmetic_input",
+                                        "nested_lineage": {
+                                            "computation_type": "SUMIFS",
+                                            "computation_params": {
+                                                "agg_function": "SUM",
+                                                "scalar": 1,
+                                                "sum_column": "Reinsurance Statutory Reserve - Total",
+                                                "group_by": [
+                                                    "Product Subtype"
+                                                ],
+                                                "static_filters": []
+                                            },
+                                            "lineage_depth": 1,
+                                            "direct_inputs": [
+                                                {
+                                                    "column": "Reinsurance Statutory Reserve - Total",
+                                                    "table": "SQL_data",
+                                                    "is_raw": true,
+                                                    "role": "sum_range"
+                                                },
+                                                {
+                                                    "column": "Product Subtype",
+                                                    "table": "STAT Reserve",
+                                                    "is_raw": false,
+                                                    "role": "group_by_key"
+                                                }
+                                            ],
+                                            "ultimate_raw_sources": [
+                                                "SQL_data :: Reinsurance Statutory Reserve - Total"
+                                            ],
+                                            "fingerprint": "SUMIFS|scalar:1|SUM:reinsurance_statutory_reserve_total|GROUP_BY:product_subtype"
+                                        }
+                                    },
+                                    {
+                                        "column": "LFG Gross GA STAT Reserve",
+                                        "table": "STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "arithmetic_input",
+                                        "nested_lineage": {
+                                            "computation_type": "SUMIFS",
+                                            "computation_params": {
+                                                "agg_function": "SUM",
+                                                "scalar": 1,
+                                                "sum_column": "Statutory Reserves - Total - General Account",
+                                                "group_by": [
+                                                    "Product Subtype"
+                                                ],
+                                                "static_filters": []
+                                            },
+                                            "lineage_depth": 1,
+                                            "direct_inputs": [
+                                                {
+                                                    "column": "Statutory Reserves - Total - General Account",
+                                                    "table": "SQL_data",
+                                                    "is_raw": true,
+                                                    "role": "sum_range"
+                                                },
+                                                {
+                                                    "column": "Product Subtype",
+                                                    "table": "STAT Reserve",
+                                                    "is_raw": false,
+                                                    "role": "group_by_key"
+                                                }
+                                            ],
+                                            "ultimate_raw_sources": [
+                                                "SQL_data :: Statutory Reserves - Total - General Account"
+                                            ],
+                                            "fingerprint": "SUMIFS|scalar:1|SUM:statutory_reserves_total_general_account|GROUP_BY:product_subtype"
+                                        }
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Statutory Reserves - Total - Separate Account",
+                                    "SQL_data :: Reinsurance Statutory Reserve - Total",
+                                    "SQL_data :: Statutory Reserves - Total - General Account"
+                                ],
+                                "fingerprint": "ARITHMETIC|USES:sql_data_::_reinsurance_statutory_reserve_total,sql_data_::_statutory_reserves_total_general_account,sql_data_::_statutory_reserves_total_separate_account"
+                            }
+                        },
+                        {
+                            "column_name": "LNBAR 2024 EB Total STAT Reserve",
+                            "table_name": "STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=-1*SUMIFS(SQL_data!G:G,SQL_data!$B:$B,Summary!$A6)",
+                            "formula_count": 1,
+                            "formula_pattern": "-1 * SUM(SQL_data[Captive Statutory Reserve - Total]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                731779148,
+                                485427789
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The total statutory reserve value specifically for the LNBAR 2024 EB portfolio.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": -1,
+                                    "sum_column": "Captive Statutory Reserve - Total",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Captive Statutory Reserve - Total",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Captive Statutory Reserve - Total"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:-1|SUM:captive_statutory_reserve_total|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LFG Net Total STAT Reserve",
+                            "table_name": "STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!H:H,SQL_data!$B:$B,Summary!$A6)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Net Statutory Reserves - Total]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                324064527,
+                                215673992
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The final net statutory reserve amount after all adjustments.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Net Statutory Reserves - Total",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Net Statutory Reserves - Total",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Net Statutory Reserves - Total"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:net_statutory_reserves_total|GROUP_BY:product_subtype"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "LNBAR 2024 EB Total STAT Reserve",
+                    "table_type": "section_summary",
+                    "section_title": "LNBAR 2024 EB Total STAT Reserve",
+                    "table_range": "I4:K9",
+                    "header_row": 5,
+                    "data_start_row": 6,
+                    "data_end_row": 7,
+                    "total_rows": [
+                        8
+                    ],
+                    "check_rows": [
+                        9
+                    ],
+                    "row_header_columns": [
+                        "Product Subtype"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 3,
+                    "input_cell_count": 0,
+                    "business_purpose": "Breaks down the total statutory reserves by the flexibility of the product subtype.",
+                    "measures": [
+                        "Flexible",
+                        "Non-Flexible"
+                    ],
+                    "dimensions": [
+                        "Product Subtype"
+                    ],
+                    "inter_table_relationships": [
+                        "Uses row 9 as a check row to ensure data integrity against total calculations."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Product Subtype",
+                            "table_name": "LNBAR 2024 EB Total STAT Reserve",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "BOLI UL",
+                                "COLI VUL"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The specific category of the insurance product being analyzed."
+                        },
+                        {
+                            "column_name": "Flexible",
+                            "table_name": "LNBAR 2024 EB Total STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=-1*SUMIFS(SQL_data!G:G,SQL_data!$B:$B,Summary!$A6,SQL_data!$C:$C,Summary!J$5)",
+                            "formula_count": 1,
+                            "formula_pattern": "-1 * SUM(SQL_data[Captive Statutory Reserve - Total]) WHERE [RBC C2 Product Category = 'Flexible'] GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                517470084,
+                                332572515
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "Statutory reserve portion associated with flexible product features.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": -1,
+                                    "sum_column": "Captive Statutory Reserve - Total",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "RBC C2 Product Category",
+                                            "operator": "=",
+                                            "value": "'Flexible'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Captive Statutory Reserve - Total",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "LNBAR 2024 EB Total STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "group_by_key"
+                                    },
+                                    {
+                                        "column": "RBC C2 Product Category",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'Flexible'"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Captive Statutory Reserve - Total",
+                                    "SQL_data :: RBC C2 Product Category"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:-1|SUM:captive_statutory_reserve_total|WHERE:rbc_c2_product_category='flexible'|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "Non-Flexible",
+                            "table_name": "LNBAR 2024 EB Total STAT Reserve",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=-1*SUMIFS(SQL_data!G:G,SQL_data!$B:$B,Summary!$A6,SQL_data!$C:$C,Summary!K$5)",
+                            "formula_count": 1,
+                            "formula_pattern": "-1 * SUM(SQL_data[Captive Statutory Reserve - Total]) WHERE [RBC C2 Product Category = 'Non-Flexible'] GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                214309064,
+                                152855274
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "Statutory reserve portion associated with non-flexible product features.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": -1,
+                                    "sum_column": "Captive Statutory Reserve - Total",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": [
+                                        {
+                                            "column": "RBC C2 Product Category",
+                                            "operator": "=",
+                                            "value": "'Non-Flexible'"
+                                        }
+                                    ]
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Captive Statutory Reserve - Total",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "LNBAR 2024 EB Total STAT Reserve",
+                                        "is_raw": false,
+                                        "role": "group_by_key"
+                                    },
+                                    {
+                                        "column": "RBC C2 Product Category",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "static_filter",
+                                        "filter_value": "'Non-Flexible'"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Captive Statutory Reserve - Total",
+                                    "SQL_data :: RBC C2 Product Category"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:-1|SUM:captive_statutory_reserve_total|WHERE:rbc_c2_product_category='non_flexible'|GROUP_BY:product_subtype"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "Tax Reserves",
+                    "table_type": "section_summary",
+                    "section_title": "Tax Reserves",
+                    "table_range": "A11:E16",
+                    "header_row": 12,
+                    "data_start_row": 13,
+                    "data_end_row": 14,
+                    "total_rows": [
+                        15
+                    ],
+                    "check_rows": [
+                        16
+                    ],
+                    "row_header_columns": [
+                        "Product"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 5,
+                    "input_cell_count": 0,
+                    "business_purpose": "Aggregates tax-basis reserves for General and Separate accounts to determine the net tax reserve position.",
+                    "measures": [
+                        "LFG Net GA Tax Reserve",
+                        "LFG Net SA Tax Reserve",
+                        "LFG Total Net Tax Reserve",
+                        "LNBAR 2024 EB Tax Reserve"
+                    ],
+                    "dimensions": [
+                        "Product"
+                    ],
+                    "inter_table_relationships": [
+                        "Uses row 16 as a check row to ensure data integrity against total calculations."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Product",
+                            "table_name": "Tax Reserves",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "BOLI UL",
+                                "COLI VUL"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The specific category of the insurance product being analyzed."
+                        },
+                        {
+                            "column_name": "LFG Net GA Tax Reserve",
+                            "table_name": "Tax Reserves",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!P:P,SQL_data!$B:$B,Summary!$A13)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Net Tax Reserves - Total 2018 - General Account]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                808592059,
+                                539119628
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "Net tax reserves held within the General Account.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Net Tax Reserves - Total 2018 - General Account",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Net Tax Reserves - Total 2018 - General Account",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Net Tax Reserves - Total 2018 - General Account",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:net_tax_reserves_total_2018_general_account|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LFG Net SA Tax Reserve",
+                            "table_name": "Tax Reserves",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!Q:Q,SQL_data!$B:$B,Summary!$A13)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Net Tax Reserves - Total 2018 - Separate Account]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                100689183,
+                                66917757
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "Net tax reserves held within the Separate Account.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Net Tax Reserves - Total 2018 - Separate Account",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Net Tax Reserves - Total 2018 - Separate Account",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Net Tax Reserves - Total 2018 - Separate Account",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:net_tax_reserves_total_2018_separate_account|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LFG Total Net Tax Reserve",
+                            "table_name": "Tax Reserves",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!R:R,SQL_data!$B:$B,Summary!$A13)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Net Tax Reserves - Total 2018]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                909281242,
+                                606037385
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The combined net tax reserve for both General and Separate accounts.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Net Tax Reserves - Total 2018",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Net Tax Reserves - Total 2018",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Net Tax Reserves - Total 2018",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:net_tax_reserves_total_2018|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LNBAR 2024 EB Tax Reserve",
+                            "table_name": "Tax Reserves",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=-1*SUMIFS(SQL_data!S:S,SQL_data!$B:$B,Summary!$A13)",
+                            "formula_count": 1,
+                            "formula_pattern": "-1 * SUM(SQL_data[Captive Tax - Reserve - Total 2018]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                364561435,
+                                242785884
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The specific tax reserve allocation for the LNBAR 2024 EB portfolio.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": -1,
+                                    "sum_column": "Captive Tax - Reserve - Total 2018",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Captive Tax - Reserve - Total 2018",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Captive Tax - Reserve - Total 2018",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:-1|SUM:captive_tax_reserve_total_2018|GROUP_BY:product_subtype"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "GAAP Ben Reserves",
+                    "table_type": "section_summary",
+                    "section_title": "GAAP Ben Reserves",
+                    "table_range": "A18:E23",
+                    "header_row": 19,
+                    "data_start_row": 20,
+                    "data_end_row": 21,
+                    "total_rows": [
+                        22
+                    ],
+                    "check_rows": [
+                        23
+                    ],
+                    "row_header_columns": [
+                        "Product"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 5,
+                    "input_cell_count": 0,
+                    "business_purpose": "Summarizes GAAP benefit reserves, adjusting for non-TAI third-party components.",
+                    "measures": [
+                        "LFG Gross Total GAAP Ben Reserve",
+                        "Non-TAI 3rd Party GAAP Component",
+                        "LFG Net of Non-TAI GAAP Ben Reserve",
+                        "LNBAR 2024 EB GAAP Ben Reserve"
+                    ],
+                    "dimensions": [
+                        "Product"
+                    ],
+                    "inter_table_relationships": [
+                        "Uses row 23 as a check row to ensure data integrity against total calculations."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Product",
+                            "table_name": "GAAP Ben Reserves",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "BOLI UL",
+                                "COLI VUL"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The specific category of the insurance product being analyzed."
+                        },
+                        {
+                            "column_name": "LFG Gross Total GAAP Ben Reserve",
+                            "table_name": "GAAP Ben Reserves",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!T:T,SQL_data!$B:$B,Summary!$A20)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[GAAP Reserve - Total]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                316095305,
+                                208633369
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The gross GAAP benefit reserve before third-party adjustments.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "GAAP Reserve - Total",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "GAAP Reserve - Total",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: GAAP Reserve - Total",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:gaap_reserve_total|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "Non-TAI 3rd Party GAAP Component",
+                            "table_name": "GAAP Ben Reserves",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!U:U,SQL_data!$B:$B,Summary!$A20)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Non-TAI Reinsurance GAAP - Reserve - Total]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                6321413,
+                                4131055
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The GAAP reserve component related to non-TAI third-party reinsurance.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Non-TAI Reinsurance GAAP - Reserve - Total",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Non-TAI Reinsurance GAAP - Reserve - Total",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Non-TAI Reinsurance GAAP - Reserve - Total",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:non_tai_reinsurance_gaap_reserve_total|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LFG Net of Non-TAI GAAP Ben Reserve",
+                            "table_name": "GAAP Ben Reserves",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUM(B20:C20)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(LFG Gross Total GAAP Ben Reserve) + SUM(Non-TAI 3rd Party GAAP Component)",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                322416718,
+                                212764424
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUM"
+                            ],
+                            "definition": "The net GAAP benefit reserve after accounting for non-TAI components.",
+                            "formula_lineage": {
+                                "computation_type": "SUM_RANGE",
+                                "computation_params": {},
+                                "lineage_depth": 1,
+                                "direct_inputs": [],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: GAAP Reserve - Total",
+                                    "SQL_data :: Product Subtype",
+                                    "SQL_data :: Non-TAI Reinsurance GAAP - Reserve - Total"
+                                ],
+                                "fingerprint": "SUM_RANGE"
+                            }
+                        },
+                        {
+                            "column_name": "LNBAR 2024 EB GAAP Ben Reserve",
+                            "table_name": "GAAP Ben Reserves",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=D20",
+                            "formula_count": 1,
+                            "formula_pattern": "GAAP Ben Reserves[LFG Net of Non-TAI GAAP Ben Reserve]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                322416718,
+                                212764424
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The specific GAAP benefit reserve allocation for the LNBAR 2024 EB portfolio.",
+                            "formula_lineage": {
+                                "computation_type": "PASS_THROUGH",
+                                "computation_params": {
+                                    "points_to_column": "LFG Net of Non-TAI GAAP Ben Reserve"
+                                },
+                                "lineage_depth": 2,
+                                "direct_inputs": [
+                                    {
+                                        "column": "LFG Net of Non-TAI GAAP Ben Reserve",
+                                        "table": "GAAP Ben Reserves",
+                                        "is_raw": false,
+                                        "role": "arithmetic_input",
+                                        "nested_lineage": {
+                                            "computation_type": "SUM_RANGE",
+                                            "computation_params": {},
+                                            "lineage_depth": 1,
+                                            "direct_inputs": [],
+                                            "ultimate_raw_sources": [
+                                                "SQL_data :: GAAP Reserve - Total",
+                                                "SQL_data :: Product Subtype",
+                                                "SQL_data :: Non-TAI Reinsurance GAAP - Reserve - Total"
+                                            ],
+                                            "fingerprint": "SUM_RANGE"
+                                        }
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: GAAP Reserve - Total",
+                                    "SQL_data :: Product Subtype",
+                                    "SQL_data :: Non-TAI Reinsurance GAAP - Reserve - Total"
+                                ],
+                                "fingerprint": "PASS_THROUGH|REF:lfg_net_of_non_tai_gaap_ben_reserve"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "Face Amount",
+                    "table_type": "section_summary",
+                    "section_title": "Face Amount",
+                    "table_range": "A26:F31",
+                    "header_row": 27,
+                    "data_start_row": 28,
+                    "data_end_row": 29,
+                    "total_rows": [
+                        30
+                    ],
+                    "check_rows": [
+                        31
+                    ],
+                    "row_header_columns": [
+                        "Product"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 6,
+                    "input_cell_count": 0,
+                    "business_purpose": "Calculates the net face amount of insurance policies, including base coverage and additional term riders.",
+                    "measures": [
+                        "LFG Gross Face - Base",
+                        "LFG Gross Face Amount - Addnl Term Rider",
+                        "3rd Party Face Base & Riders",
+                        "LFG Net Face",
+                        "LNBAR 2024 EB Face"
+                    ],
+                    "dimensions": [
+                        "Product"
+                    ],
+                    "inter_table_relationships": [
+                        "Uses row 31 as a check row to ensure data integrity against total calculations."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Product",
+                            "table_name": "Face Amount",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "BOLI UL",
+                                "COLI VUL"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The specific category of the insurance product being analyzed."
+                        },
+                        {
+                            "column_name": "LFG Gross Face - Base",
+                            "table_name": "Face Amount",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!K:K,SQL_data!$B:$B,Summary!$A28)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Face Amount - Base]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                2435493885,
+                                1618492281
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The base face amount of the insurance policies.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Face Amount - Base",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Face Amount - Base",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Face Amount - Base",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:face_amount_base|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LFG Gross Face Amount - Addnl Term Rider",
+                            "table_name": "Face Amount",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!L:L,SQL_data!$B:$B,Summary!$A28)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Face Amount - Addl Term Rider]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                723337977,
+                                486882065
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The face amount associated with additional term riders.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Face Amount - Addl Term Rider",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Face Amount - Addl Term Rider",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Face Amount - Addl Term Rider",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:face_amount_addl_term_rider|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "3rd Party Face Base & Riders",
+                            "table_name": "Face Amount",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=-1*SUMIFS(SQL_data!M:M,SQL_data!$B:$B,Summary!$A28)",
+                            "formula_count": 1,
+                            "formula_pattern": "-1 * SUM(SQL_data[Face Amount - Ceded]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                609494659,
+                                400785999
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The face amount ceded to or covered by third parties.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": -1,
+                                    "sum_column": "Face Amount - Ceded",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Face Amount - Ceded",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Face Amount - Ceded",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:-1|SUM:face_amount_ceded|GROUP_BY:product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LFG Net Face",
+                            "table_name": "Face Amount",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=B28+D28",
+                            "formula_count": 1,
+                            "formula_pattern": "Face Amount[LFG Gross Face - Base]+Face Amount[3rd Party Face Base & Riders]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                3044988544,
+                                2019278280
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The net face amount after adjusting for third-party coverage.",
+                            "formula_lineage": {
+                                "computation_type": "ARITHMETIC",
+                                "computation_params": {
+                                    "inputs": [
+                                        "3rd Party Face Base & Riders",
+                                        "LFG Gross Face - Base"
+                                    ],
+                                    "expression": "Face Amount[LFG Gross Face - Base]+Face Amount[3rd Party Face Base & Riders]"
+                                },
+                                "lineage_depth": 2,
+                                "direct_inputs": [
+                                    {
+                                        "column": "3rd Party Face Base & Riders",
+                                        "table": "Face Amount",
+                                        "is_raw": false,
+                                        "role": "arithmetic_input",
+                                        "nested_lineage": {
+                                            "computation_type": "SUMIFS",
+                                            "computation_params": {
+                                                "agg_function": "SUM",
+                                                "scalar": -1,
+                                                "sum_column": "Face Amount - Ceded",
+                                                "group_by": [
+                                                    "Product Subtype"
+                                                ],
+                                                "static_filters": []
+                                            },
+                                            "lineage_depth": 1,
+                                            "direct_inputs": [
+                                                {
+                                                    "column": "Face Amount - Ceded",
+                                                    "table": "SQL_data",
+                                                    "is_raw": true,
+                                                    "role": "sum_range"
+                                                },
+                                                {
+                                                    "column": "Product Subtype",
+                                                    "table": "SQL_data",
+                                                    "is_raw": true,
+                                                    "role": "group_by_key"
+                                                }
+                                            ],
+                                            "ultimate_raw_sources": [
+                                                "SQL_data :: Face Amount - Ceded",
+                                                "SQL_data :: Product Subtype"
+                                            ],
+                                            "fingerprint": "SUMIFS|scalar:-1|SUM:face_amount_ceded|GROUP_BY:product_subtype"
+                                        }
+                                    },
+                                    {
+                                        "column": "LFG Gross Face - Base",
+                                        "table": "Face Amount",
+                                        "is_raw": false,
+                                        "role": "arithmetic_input",
+                                        "nested_lineage": {
+                                            "computation_type": "SUMIFS",
+                                            "computation_params": {
+                                                "agg_function": "SUM",
+                                                "scalar": 1,
+                                                "sum_column": "Face Amount - Base",
+                                                "group_by": [
+                                                    "Product Subtype"
+                                                ],
+                                                "static_filters": []
+                                            },
+                                            "lineage_depth": 1,
+                                            "direct_inputs": [
+                                                {
+                                                    "column": "Face Amount - Base",
+                                                    "table": "SQL_data",
+                                                    "is_raw": true,
+                                                    "role": "sum_range"
+                                                },
+                                                {
+                                                    "column": "Product Subtype",
+                                                    "table": "SQL_data",
+                                                    "is_raw": true,
+                                                    "role": "group_by_key"
+                                                }
+                                            ],
+                                            "ultimate_raw_sources": [
+                                                "SQL_data :: Face Amount - Base",
+                                                "SQL_data :: Product Subtype"
+                                            ],
+                                            "fingerprint": "SUMIFS|scalar:1|SUM:face_amount_base|GROUP_BY:product_subtype"
+                                        }
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Face Amount - Ceded",
+                                    "SQL_data :: Product Subtype",
+                                    "SQL_data :: Face Amount - Base"
+                                ],
+                                "fingerprint": "ARITHMETIC|USES:sql_data_::_face_amount_base,sql_data_::_face_amount_ceded,sql_data_::_product_subtype"
+                            }
+                        },
+                        {
+                            "column_name": "LNBAR 2024 EB Face",
+                            "table_name": "Face Amount",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=E28",
+                            "formula_count": 1,
+                            "formula_pattern": "Face Amount[LFG Net Face]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                3044988544,
+                                2019278280
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The total face amount for the LNBAR 2024 EB portfolio.",
+                            "formula_lineage": {
+                                "computation_type": "PASS_THROUGH",
+                                "computation_params": {
+                                    "points_to_column": "LFG Net Face"
+                                },
+                                "lineage_depth": 3,
+                                "direct_inputs": [
+                                    {
+                                        "column": "LFG Net Face",
+                                        "table": "Face Amount",
+                                        "is_raw": false,
+                                        "role": "arithmetic_input",
+                                        "nested_lineage": {
+                                            "computation_type": "ARITHMETIC",
+                                            "computation_params": {
+                                                "inputs": [
+                                                    "3rd Party Face Base & Riders",
+                                                    "LFG Gross Face - Base"
+                                                ],
+                                                "expression": "Face Amount[LFG Gross Face - Base]+Face Amount[3rd Party Face Base & Riders]"
+                                            },
+                                            "lineage_depth": 2,
+                                            "direct_inputs": [
+                                                {
+                                                    "column": "3rd Party Face Base & Riders",
+                                                    "table": "Face Amount",
+                                                    "is_raw": false,
+                                                    "role": "arithmetic_input",
+                                                    "nested_lineage": {
+                                                        "computation_type": "SUMIFS",
+                                                        "computation_params": {
+                                                            "agg_function": "SUM",
+                                                            "scalar": -1,
+                                                            "sum_column": "Face Amount - Ceded",
+                                                            "group_by": [
+                                                                "Product Subtype"
+                                                            ],
+                                                            "static_filters": []
+                                                        },
+                                                        "lineage_depth": 1,
+                                                        "direct_inputs": [
+                                                            {
+                                                                "column": "Face Amount - Ceded",
+                                                                "table": "SQL_data",
+                                                                "is_raw": true,
+                                                                "role": "sum_range"
+                                                            },
+                                                            {
+                                                                "column": "Product Subtype",
+                                                                "table": "SQL_data",
+                                                                "is_raw": true,
+                                                                "role": "group_by_key"
+                                                            }
+                                                        ],
+                                                        "ultimate_raw_sources": [
+                                                            "SQL_data :: Face Amount - Ceded",
+                                                            "SQL_data :: Product Subtype"
+                                                        ],
+                                                        "fingerprint": "SUMIFS|scalar:-1|SUM:face_amount_ceded|GROUP_BY:product_subtype"
+                                                    }
+                                                },
+                                                {
+                                                    "column": "LFG Gross Face - Base",
+                                                    "table": "Face Amount",
+                                                    "is_raw": false,
+                                                    "role": "arithmetic_input",
+                                                    "nested_lineage": {
+                                                        "computation_type": "SUMIFS",
+                                                        "computation_params": {
+                                                            "agg_function": "SUM",
+                                                            "scalar": 1,
+                                                            "sum_column": "Face Amount - Base",
+                                                            "group_by": [
+                                                                "Product Subtype"
+                                                            ],
+                                                            "static_filters": []
+                                                        },
+                                                        "lineage_depth": 1,
+                                                        "direct_inputs": [
+                                                            {
+                                                                "column": "Face Amount - Base",
+                                                                "table": "SQL_data",
+                                                                "is_raw": true,
+                                                                "role": "sum_range"
+                                                            },
+                                                            {
+                                                                "column": "Product Subtype",
+                                                                "table": "SQL_data",
+                                                                "is_raw": true,
+                                                                "role": "group_by_key"
+                                                            }
+                                                        ],
+                                                        "ultimate_raw_sources": [
+                                                            "SQL_data :: Face Amount - Base",
+                                                            "SQL_data :: Product Subtype"
+                                                        ],
+                                                        "fingerprint": "SUMIFS|scalar:1|SUM:face_amount_base|GROUP_BY:product_subtype"
+                                                    }
+                                                }
+                                            ],
+                                            "ultimate_raw_sources": [
+                                                "SQL_data :: Face Amount - Ceded",
+                                                "SQL_data :: Product Subtype",
+                                                "SQL_data :: Face Amount - Base"
+                                            ],
+                                            "fingerprint": "ARITHMETIC|USES:sql_data_::_face_amount_base,sql_data_::_face_amount_ceded,sql_data_::_product_subtype"
+                                        }
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Face Amount - Ceded",
+                                    "SQL_data :: Product Subtype",
+                                    "SQL_data :: Face Amount - Base"
+                                ],
+                                "fingerprint": "PASS_THROUGH|REF:lfg_net_face"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "Cash Value",
+                    "table_type": "section_summary",
+                    "section_title": "Cash Value",
+                    "table_range": "A33:B38",
+                    "header_row": 34,
+                    "data_start_row": 35,
+                    "data_end_row": 36,
+                    "total_rows": [
+                        37
+                    ],
+                    "check_rows": [
+                        38
+                    ],
+                    "row_header_columns": [
+                        "Product"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 2,
+                    "input_cell_count": 0,
+                    "business_purpose": "Reports the General Account cash value for the specified products.",
+                    "measures": [
+                        "Policy GA Cash Value"
+                    ],
+                    "dimensions": [
+                        "Product"
+                    ],
+                    "inter_table_relationships": [
+                        "Uses row 38 as a check row to ensure data integrity against total calculations."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Product",
+                            "table_name": "Cash Value",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "BOLI UL",
+                                "COLI VUL"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The specific category of the insurance product being analyzed."
+                        },
+                        {
+                            "column_name": "Policy GA Cash Value",
+                            "table_name": "Cash Value",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=SUMIFS(SQL_data!N:N,SQL_data!$B:$B,Summary!$A35)",
+                            "formula_count": 1,
+                            "formula_pattern": "SUM(SQL_data[Cash Value - General Account]) GROUP BY [Product Subtype]",
+                            "number_format": "_ * #,##0_ ;_ * \\-#,##0_ ;_ * \"-\"??_ ;_ @_ ",
+                            "number_format_type": "number",
+                            "sample_values": [
+                                486388531,
+                                323091171
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "SUMIFS"
+                            ],
+                            "definition": "The total cash value held in the General Account for the policies.",
+                            "formula_lineage": {
+                                "computation_type": "SUMIFS",
+                                "computation_params": {
+                                    "agg_function": "SUM",
+                                    "scalar": 1,
+                                    "sum_column": "Cash Value - General Account",
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Cash Value - General Account",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "sum_range"
+                                    },
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Cash Value - General Account",
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "SUMIFS|scalar:1|SUM:cash_value_general_account|GROUP_BY:product_subtype"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "table_name": "Count",
+                    "table_type": "section_summary",
+                    "section_title": "Count",
+                    "table_range": "A40:B45",
+                    "header_row": 41,
+                    "data_start_row": 42,
+                    "data_end_row": 43,
+                    "total_rows": [
+                        44
+                    ],
+                    "check_rows": [
+                        45
+                    ],
+                    "row_header_columns": [
+                        "Product"
+                    ],
+                    "column_header_rows": [],
+                    "row_count": 2,
+                    "column_count": 2,
+                    "input_cell_count": 0,
+                    "business_purpose": "Provides a simple count of policies per product subtype.",
+                    "measures": [
+                        "Policy Count"
+                    ],
+                    "dimensions": [
+                        "Product"
+                    ],
+                    "inter_table_relationships": [
+                        "Uses row 45 as a check row to ensure data integrity against total calculations."
+                    ],
+                    "columns": [
+                        {
+                            "column_name": "Product",
+                            "table_name": "Count",
+                            "data_type": "string",
+                            "type": "label",
+                            "formula": "",
+                            "formula_count": 0,
+                            "formula_pattern": "",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                "BOLI UL",
+                                "COLI VUL"
+                            ],
+                            "nesting_depth": 0,
+                            "function_chain": [],
+                            "definition": "The specific category of the insurance product being analyzed."
+                        },
+                        {
+                            "column_name": "Policy Count",
+                            "table_name": "Count",
+                            "data_type": "integer",
+                            "type": "formula_based",
+                            "formula": "=COUNTIFS(SQL_data!$B:$B,Summary!$A42)",
+                            "formula_count": 1,
+                            "formula_pattern": "COUNT(SQL_data) GROUP BY [Product Subtype]",
+                            "number_format": "General",
+                            "number_format_type": "general",
+                            "sample_values": [
+                                3605,
+                                2395
+                            ],
+                            "nesting_depth": 1,
+                            "function_chain": [
+                                "COUNTIFS"
+                            ],
+                            "definition": "The total number of policies associated with the product subtype.",
+                            "formula_lineage": {
+                                "computation_type": "COUNTIFS",
+                                "computation_params": {
+                                    "group_by": [
+                                        "Product Subtype"
+                                    ],
+                                    "static_filters": []
+                                },
+                                "lineage_depth": 1,
+                                "direct_inputs": [
+                                    {
+                                        "column": "Product Subtype",
+                                        "table": "SQL_data",
+                                        "is_raw": true,
+                                        "role": "group_by_key"
+                                    }
+                                ],
+                                "ultimate_raw_sources": [
+                                    "SQL_data :: Product Subtype"
+                                ],
+                                "fingerprint": "COUNTIFS|GROUP_BY:product_subtype"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "extraction_warnings": []
+}

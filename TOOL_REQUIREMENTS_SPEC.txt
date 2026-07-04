@@ -1,0 +1,445 @@
+Build and fix the Insurance KPI Ontology Mapping Tool using the uploaded project folders.
+
+Source folders:
+
+1. `Latest kpi.zip` = golden reference / correct pipeline output and original scripts.
+2. `LATEST KPI TOOL.zip` = current React + FastAPI tool that must be corrected and productionized.
+
+Primary required input files:
+
+1. `report_a.json`
+2. `report_b.json`
+3. `life_annuity_actuarial_reserving_kpi_ontology.xlsx`
+
+Primary required output:
+`final_output_with_all_steps.xlsx`
+
+The generated output workbook must match the golden reference workbook from `Latest kpi/final_output_with _all_steps.xlsx` in sheet names, row counts, columns, ordering, and logic.
+
+Current tool issue to fix:
+The existing backend output does not match the golden file. It currently produces fewer rows because it deduplicates Worksite KPIs incorrectly by only `Report A + Report Col Name`. This collapses repeated KPI names like `Gross Reserve`, `3rd Party YRT`, and `Net Reserve` across STAT Reserve, Tax Reserve, GAAP Reserve, Face Amount, and Exhibit 5. The correct logic must treat each report KPI as unique by composite identity:
+`Report A + Report Col Name + Report Formula + table/section/context`
+Do not deduplicate only by column name.
+
+Expected sample counts from the golden workbook:
+
+* Report A extracted KPIs: 23
+* Report B extracted KPIs: 14
+* Total extracted report KPIs: 37
+* Ontology KPIs from `LA_Actuarial_Reserving`: 98
+* Cartesian candidate universe: 37 × 98 = 3,626
+* Python top-5 shortlisted rows: 37 × 5 = 185
+* Final All Comparisons rows: 185 data rows, 186 including header
+* Best Mapping rows: 37 data rows, 38 including header
+* Common Ontology rows: 30 data rows, 31 including header
+* Common Ontology KPI count: 10
+* Step 4 Validation rows: 30 data rows, 31 including header
+* Step 5 Pairwise rows: 35 data rows, 36 including header
+* LLM Pairwise Formula Check rows: 35 data rows, 36 including header
+* EB mapped ontology KPIs: 14
+* EB missing ontology KPIs: 84
+* Worksite mapped ontology KPIs: 11
+* Worksite missing ontology KPIs: 87
+
+Required final workbook sheets, in this exact order:
+
+1. `1. Summary`
+2. `2. All Comparisons`
+3. `3. Best Mapping`
+4. `4. Common Ontology`
+5. `5. Step4 Definition Validation`
+6. `6. Step5 Pairwise Check`
+7. `LLM Pairwise Formula Check`
+8. `Best Mapping - EB Details`
+9. `Best Mapping - Worksite`
+10. `RW Missing KPI Summary`
+11. `EB Mapped Ontology KPIs`
+12. `EB Missing Ontology KPIs`
+13. `EB LLM Missing KPI Recs`
+14. `Worksite Mapped Ontology KPIs`
+15. `Worksite Missing Ontology KPIs`
+16. `Worksite LLM Missing KPI Recs`
+
+Do not use dynamic truncated sheet names like:
+
+* `Best Mapping - EB Reserve Deat`
+* `Best Mapping - LNBAR Worksite`
+* `EB Reserve Deat Mapped Ontology`
+* `LNBAR Worksite Missing Ontolog`
+
+For this sample, report display labels must be:
+
+* Report A: `EB Details`
+* Report B: `Worksite`
+
+Output sheet columns must match the golden workbook.
+
+For sheets `2. All Comparisons`, `3. Best Mapping`, `4. Common Ontology`, `Best Mapping - EB Details`, and `Best Mapping - Worksite`, columns must be exactly:
+
+1. `Report A`
+2. `Report Col Name`
+3. `Report Formula`
+4. `Ontology KPI Name`
+5. `Ontology Formula`
+6. `Ontology Definition`
+7. `similarity_score`
+8. `similarity_band`
+9. `formula_equivalence_type`
+10. `actuarial_rationale`
+11. `key_formula_matches`
+12. `key_formula_differences`
+13. `business_logic_assessment`
+14. `confidence_level`
+15. `needs_human_review`
+
+For `5. Step4 Definition Validation`, use the same 15 base columns plus:
+16. `LLM Business Interpretation of Report Formula`
+17. `Formula Similarity Score`
+18. `Definition Similarity Score`
+19. `Overall Step 4 Similarity Score`
+20. `Step 4 Verdict`
+21. `Step 4 Rationale`
+
+For `6. Step5 Pairwise Check`, columns must be:
+
+1. `Ontology KPI Name`
+2. `Report 1`
+3. `Report Column 1`
+4. `Report Formula 1`
+5. `Ontology Score 1`
+6. `Report 2`
+7. `Report Column 2`
+8. `Report Formula 2`
+9. `Ontology Score 2`
+10. `Pairwise Formula Similarity Score`
+11. `Pairwise Verdict`
+12. `Pairwise Rationale`
+
+For `LLM Pairwise Formula Check`, columns must be:
+
+1. `Ontology KPI Name`
+2. `Ontology Formula`
+3. `Ontology Definition`
+4. `Report 1 File`
+5. `Report 1 Column`
+6. `Report 1 Formula`
+7. `Report 1 Mapping Score`
+8. `Report 2 File`
+9. `Report 2 Column`
+10. `Report 2 Formula`
+11. `Report 2 Mapping Score`
+12. `Formula Similarity Score`
+13. `Similarity Band`
+14. `LLM Verdict`
+15. `Formula Equivalence Type`
+16. `Rationale`
+17. `Key Formula Matches`
+18. `Key Formula Differences`
+19. `Business Discrepancy`
+20. `Needs Human Review`
+21. `Confidence Level`
+
+For mapped ontology sheets, columns must be:
+
+1. `Report Scope`
+2. `Ontology KPI`
+3. `Ontology Formula`
+4. `Ontology Definition`
+5. `Mapped Report KPI(s)`
+6. `Mapped Report Formula(s)`
+7. `Best Mapping Score(s)`
+8. `Status`
+
+For missing ontology sheets, columns must be:
+
+1. `Report Scope`
+2. `Ontology KPI`
+3. `Ontology Formula`
+4. `Ontology Definition`
+5. `Missing Reason`
+
+For LLM missing KPI recommendation sheets, columns must be:
+
+1. `Report Scope`
+2. `Ontology KPI`
+3. `Ontology Formula`
+4. `Ontology Definition`
+5. `Missing Reason`
+6. `Should Add to Report?`
+7. `Recommendation Priority`
+8. `Priority Rationale`
+9. `Industry Relevance`
+10. `Recommended Report Section`
+11. `Expected Business Value`
+12. `Reason for Recommendation`
+13. `Reason If Not Recommended`
+14. `Related Existing Report KPIs`
+15. `Related Existing Report Formulas`
+16. `Relationship to Existing Report`
+17. `Potential Formula / Calculation Guidance`
+18. `Needs Human Review`
+19. `Confidence Level`
+
+Required pipeline logic:
+
+Step 1: Load inputs
+
+* Accept exactly two or more report JSON files and one ontology Excel file from the UI.
+* For the current sample, process `report_a.json`, `report_b.json`, and `life_annuity_actuarial_reserving_kpi_ontology.xlsx`.
+* Do not rely on hardcoded local Windows paths.
+* Do not rely on bundled sample fallback unless explicitly selected in UI.
+
+Step 2: Extract ontology KPIs
+
+* Read sheet `LA_Actuarial_Reserving`.
+* Detect header row flexibly.
+* Extract:
+
+  * `KPI / Metric Name` as `Ontology KPI Name`
+  * `Formula` as `Ontology Formula`
+  * `Definition` as `Ontology Definition`
+  * Also retain category, synonyms, purpose, source, and confidence internally for dynamic scoring context.
+* Expected ontology rows for sample: 98.
+
+Step 3: Extract report KPIs from JSON
+
+* Traverse workbook → sheets → tables → columns.
+* Use only formula-based report KPI columns from relevant business summary tables.
+* Relevant tables include statutory reserve, tax reserve, GAAP reserve, face amount, cash value, count, exhibit, summary, reserve.
+* Exclude raw identifiers and dimensions such as accounting date, product subtype, policy number, triton plancode, ledger product, etc.
+* For each KPI, preserve:
+
+  * report file name
+  * sheet name
+  * table name
+  * section title
+  * column name
+  * formula pattern / formula
+  * column definition
+  * formula lineage
+  * computation type
+  * scalar
+  * aggregation function
+  * sum column
+  * inputs
+  * group-by fields
+  * static filters
+  * direct inputs
+  * ultimate raw sources
+  * fingerprint/context
+* Critical: do not collapse rows with the same `Report Col Name` if formulas or sections differ.
+* Expected sample extraction:
+
+  * EB Details: 23 KPIs
+  * Worksite: 14 KPIs
+
+Step 4: Generate candidate universe
+
+* Cross join every extracted report KPI with every ontology KPI.
+* Expected sample universe: 3,626 rows.
+* Keep internal hidden fields for report context, table name, section title, sheet name, and formula lineage.
+
+Step 5: Python pre-score and top-5 shortlist
+
+* Implement deterministic Python scoring to select top 5 ontology candidates per unique report KPI.
+* Group by composite key:
+  `Report A + Report Col Name + Report Formula + table/section/context`
+* Do not group by only `Report Col Name`.
+* Score using:
+
+  * formula token overlap
+  * KPI name overlap
+  * ontology synonym overlap
+  * statutory / GAAP / tax basis
+  * gross / net basis
+  * general account / separate account
+  * ceded / reinsurance / third-party / captive / recapture / YRT
+  * reserve / face amount / cash value / count / premium / claim family
+  * aggregation operation: SUM, COUNT, ratio, average
+  * sign convention
+  * group-by and accounting date filters
+* Expected top-5 sample rows: 185.
+
+Step 6: LLM final actuarial scoring
+
+* Send only top-5 rows to the LLM.
+* LLM must act as an expert Life & Annuity actuarial reserving specialist.
+* Primary comparison basis:
+
+  * report formula
+  * report formula business meaning
+  * ontology KPI name
+  * ontology formula
+  * ontology definition
+  * formula lineage/context
+* Formula logic and actuarial business meaning are more important than name similarity.
+* LLM must return structured fields:
+
+  * `similarity_score`
+  * `similarity_band`
+  * `formula_equivalence_type`
+  * `actuarial_rationale`
+  * `key_formula_matches`
+  * `key_formula_differences`
+  * `business_logic_assessment`
+  * `confidence_level`
+  * `needs_human_review`
+* If the LLM fails, preserve the row count and mark the failed rows clearly, but do not drop rows.
+
+Step 7: Best mapping
+
+* Select the highest `similarity_score` ontology row per unique report KPI.
+* Use composite identity, not only report column name.
+* Expected sample best mapping rows: 37.
+* Also split into:
+
+  * `Best Mapping - EB Details`: 23 rows
+  * `Best Mapping - Worksite`: 14 rows
+
+Step 8: Common ontology
+
+* From best mapping, identify ontology KPIs that appear in both reports.
+* Keep all rows mapped to those common ontology KPIs.
+* Expected sample:
+
+  * 10 common ontology KPIs
+  * 30 data rows
+* Preserve original report/order from best mapping.
+
+Step 9: Step 4 definition validation
+
+* Run LLM validation only for common ontology rows.
+* Compare report formula against ontology formula and ontology definition.
+* Return:
+
+  * business interpretation of report formula
+  * formula similarity score
+  * definition similarity score
+  * overall step 4 similarity score
+  * verdict
+  * rationale
+* Expected sample: 30 rows.
+
+Step 10: Step 5 pairwise formula comparison
+
+* For each common ontology KPI, compare every unique pair of mapped report formulas.
+* Compare formulas mapped to the same ontology KPI, including formulas from the same report and across reports.
+* Do not assume common ontology means formulas are identical.
+* Expected sample pairwise rows: 35.
+
+Step 11: LLM pairwise formula check
+
+* Run LLM on every Step 5 pair.
+* Evaluate whether the two report formulas calculate the same actuarial business metric.
+* Return exact structured fields in the golden workbook.
+
+Step 12: Report-wise missing KPI gap analysis
+
+* For each report separately:
+
+  * get ontology KPIs present in that report’s best mapping
+  * compare against all 98 ontology KPIs
+  * mark missing KPIs for that report only
+* A KPI present in EB can still be missing in Worksite.
+* Expected sample:
+
+  * EB mapped: 14
+  * EB missing: 84
+  * Worksite mapped: 11
+  * Worksite missing: 87
+* Run LLM recommendations for missing KPIs and return priority/actionability fields.
+
+Step 13: Excel export
+
+* Export exactly one workbook named `final_output_with_all_steps.xlsx`.
+* Workbook must contain all 16 sheets in exact order.
+* Apply readable formatting:
+
+  * freeze top row
+  * autofilter
+  * dark blue header with white bold text
+  * wrap text
+  * borders
+  * score-based conditional formatting
+  * suitable column widths for formulas/rationales
+* Do not include internal columns like `_report_context`, `_table_name`, `_section_title`, `_sheet_name`, `_sheet_type`, `Similarity Score`, or `Rationale` unless they are part of the golden visible schema.
+
+Step 14: Frontend requirements
+
+* React UI must allow:
+
+  * upload multiple report JSON files
+  * upload one ontology Excel
+  * run mapping
+  * show progress by pipeline step
+  * display every output tab dynamically
+  * download `final_output_with_all_steps.xlsx`
+* UI should not depend on mock data after real run.
+* Show backend errors clearly.
+* Keep output tabs aligned to workbook sheet names.
+
+Step 15: Backend/API requirements
+
+* FastAPI endpoints:
+
+  * `POST /api/upload`
+  * `POST /api/run-mapping`
+  * `GET /api/results/{run_id}`
+  * `GET /api/download/{run_id}`
+  * `GET /api/health`
+* Store every run under a unique run ID.
+* Save:
+
+  * Excel output
+  * JSON tab output for frontend
+  * optional logs/debug metadata
+* Do not expose `.env` values.
+* Do not include `node_modules`, `__pycache__`, old outputs, or secret `.env` in final clean project delivery.
+
+Step 16: Dynamic future support
+After the sample matches the golden output, make the tool dynamic for other reports:
+
+* Support any report JSON following the same rationalized workbook schema.
+* Support ontology files with slightly different but semantically similar column headers.
+* Support duplicate report KPI names by using formula/table/context identity.
+* Support more than two reports.
+* Common ontology should mean mapped by at least two unique reports.
+* Missing KPI analysis must remain report-wise.
+* Sheet names must be generated safely but with business-friendly labels.
+* Add a configuration layer for:
+
+  * ontology sheet name
+  * top N candidate count
+  * LLM batch size
+  * model/base URL/API key
+  * relevant table keywords
+  * excluded dimension columns
+  * score thresholds
+
+Step 17: Validation tests
+Create automated regression checks comparing generated sample output against the golden workbook:
+
+* same sheet names and order
+* same visible columns per sheet
+* same row counts per sheet
+* same sample summary counts
+* same extracted KPI counts: 23 and 14
+* same top-5 count: 185
+* same best mapping count: 37
+* same common ontology count: 30
+* same pairwise count: 35
+* same missing KPI counts: EB 84, Worksite 87
+* no dropped rows when LLM fails
+* no duplicate sheet-name truncation problems
+* no collapse of duplicate Worksite KPI names
+
+Acceptance criteria:
+
+1. Uploading the three sample inputs must produce a workbook matching the golden reference structure exactly.
+2. `2. All Comparisons` must have 185 data rows.
+3. `3. Best Mapping` must have 37 data rows.
+4. `Best Mapping - Worksite` must have 14 data rows, not 9.
+5. `4. Common Ontology` must have 30 data rows.
+6. Report-wise missing KPI sheets must use `EB` and `Worksite` names exactly.
+7. The tool must run end-to-end from UI upload to downloadable Excel.
+8. The pipeline must remain dynamic and not hardcoded only for these two reports, except where sample-specific labels are required to match the golden workbook.
